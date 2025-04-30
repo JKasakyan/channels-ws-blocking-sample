@@ -18,6 +18,7 @@ Here 'blocked' in the context of actively connected consumers means that Daphne 
 3. To reproduce the issue you only need to be able to connect to a PSQL database with a user that can run the `pg_sleep` command. I created a new database called `chat` on a local PSQL 14.4 server for the purposes of this example, but you can update `DATABASES` in `settings.py` accordingly for your own setup.
 
 **Reproducing the issue**
+- Start the local server by running `DJANGO_SETTINGS_MODULE=mysite.settings python manage.py runserver` from the base of the project
 - Open 4 tabs, 2 connected to http://127.0.0.1:8000/chat/sync/ and 2 connected to http://127.0.0.1:8000/chat/async/. Confirm they are functioning by sending a test message and confirming in either the terminal or web developer console that the message was sent and returned by the server
 - In 1 of the sync tabs, type 'sleep: 60' into the input box and hit send. Confirm the following appears in the terminal:
 > chat.consumers WARNING Simulating long query in ChatSyncConsumer (seconds=60)
